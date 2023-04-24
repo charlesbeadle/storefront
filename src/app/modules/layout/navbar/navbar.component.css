@@ -1,5 +1,5 @@
 header {
-  padding: 5rem;
+  padding: 5rem 2.5rem 5rem 0rem;
   display: flex;
   justify-content: space-between;
   align-items: center;
@@ -17,8 +17,4 @@ ul {
 
 .nav-item {
   font-size: 1.8rem;
-}
-
-.nav-item:first-child {
-  margin-right: 4rem;
 }
