@@ -1,0 +1,7 @@
+<main>
+  <div
+  *ngFor="let product of products"
+  class="card"
+  [style.backgroundImage]="'url(' + product.url + ')'"
+  >{{ product.name }}</div>
+</main>
