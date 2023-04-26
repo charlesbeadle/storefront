@@ -1,7 +1,14 @@
 <main>
-  <div
-  *ngFor="let product of products"
-  class="card"
-  [style.backgroundImage]="'url(' + product.url + ')'"
-  >{{ product.name }}</div>
+  <div class="product" *ngFor="let product of products">
+    <div class="product__img" [style.backgroundImage]="'url(' + product.url + ')'"></div>
+    <div class="product__options">
+      <p class="product__name">{{product.name}}</p>
+      <div class="product__count-wrapper">
+        <button class="product__count"><mat-icon>keyboard_arrow_down</mat-icon></button>
+        <p>1</p>
+        <button class="product__count"><mat-icon>keyboard_arrow_up</mat-icon></button>
+      </div>
+      <button class="product__add-to-cart">Add to cart</button><!-- submit btn -->
+    </div>
+  </div>
 </main>
