@@ -4,11 +4,12 @@
     <div class="product__options">
       <p class="product__name">{{product.name}}</p>
       <div class="product__count-wrapper">
-        <button class="product__count"><mat-icon>keyboard_arrow_down</mat-icon></button>
-        <p>1</p>
-        <button class="product__count"><mat-icon>keyboard_arrow_up</mat-icon></button>
+        <button class="product__count"
+          (click)="removeProduct(product.id)"><mat-icon>keyboard_arrow_down</mat-icon></button>
+        <p>{{ productQuantity[product.id] }}</p>
+        <button class="product__count" (click)="addProduct(product.id)"><mat-icon>keyboard_arrow_up</mat-icon></button>
       </div>
-      <button class="product__add-to-cart">Add to cart</button><!-- submit btn -->
+      <button class="product__add-to-cart" (click)="addToCart()">Add to cart</button><!-- submit btn -->
     </div>
   </div>
 </main>

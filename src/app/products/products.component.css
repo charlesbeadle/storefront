@@ -1,6 +1,4 @@
 main {
-  margin: 0 auto;
-  min-height: 100vh;
   display: grid;
   grid-template-rows: repeat(2, 38rem);
   grid-template-columns: repeat(3, 28rem);
