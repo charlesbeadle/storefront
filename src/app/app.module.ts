@@ -8,14 +8,16 @@ import { MatBadgeModule } from '@angular/material/badge';
 import { AppComponent } from './app.component';
 import { NavbarComponent } from './navbar/navbar.component'
 import { FooterComponent } from './footer/footer.component'
-import { ProductsComponent } from './products/products.component'
+import { ProductsComponent } from './products/products.component';
+import { CartComponent } from './cart/cart.component'
 
 @NgModule({
   declarations: [
     AppComponent,
     NavbarComponent,
     FooterComponent,
-    ProductsComponent
+    ProductsComponent,
+    CartComponent
   ],
   imports: [
     BrowserModule,
