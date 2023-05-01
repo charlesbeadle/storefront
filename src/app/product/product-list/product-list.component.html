@@ -1,6 +1,9 @@
 <div class="products-container">
   <div class="product" *ngFor="let product of products">
-    <div class="product__img" [style.backgroundImage]="'url(' + product.url + ')'"></div>
+    <a [routerLink]="['/products', product.id]">
+      <div class="product__img" [style.backgroundImage]="'url(' + product.url + ')'">
+      </div>
+    </a>
     <div class="product__options">
       <p class="product__name">{{product.name}}</p>
       <div class="product__count-wrapper">
