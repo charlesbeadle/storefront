@@ -1,4 +1,4 @@
-<main>
+<div class="products-container">
   <div class="product" *ngFor="let product of products">
     <div class="product__img" [style.backgroundImage]="'url(' + product.url + ')'"></div>
     <div class="product__options">
@@ -12,4 +12,4 @@
       <button class="product__add-to-cart" (click)="addToCart()">Add to cart</button><!-- submit btn -->
     </div>
   </div>
-</main>
+</div>

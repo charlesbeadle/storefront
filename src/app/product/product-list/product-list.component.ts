@@ -1,17 +1,17 @@
 import { Component, OnInit, Output, EventEmitter } from '@angular/core';
-import { ProductService } from '../services/products.service';
-import { Product } from '../types/product';
+import { ProductService } from '../../services/products.service';
+import { Product } from '../../types/product';
 
 interface ProductQuantity {
   [id: number]: number;
 }
 
 @Component({
-  selector: 'app-products',
-  templateUrl: './products.component.html',
-  styleUrls: ['./products.component.css'],
+  selector: 'app-product-list',
+  templateUrl: './product-list.component.html',
+  styleUrls: ['./product-list.component.css'],
 })
-export class ProductsComponent implements OnInit {
+export class ProductListComponent implements OnInit {
   products: Product[] = [];
   productQuantity: ProductQuantity = {};
   @Output() addProductsToCart = new EventEmitter<any>();

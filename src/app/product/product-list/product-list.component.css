@@ -1,4 +1,4 @@
-main {
+.products-container {
   margin-bottom: 30rem;
   display: grid;
   grid-template-rows: repeat(2, 52rem);
