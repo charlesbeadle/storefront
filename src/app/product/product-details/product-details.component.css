@@ -1,0 +1,48 @@
+.container {
+  margin: 0 auto;
+  min-width: 50rem;
+  width: fit-content;
+  max-width: 95rem;
+  display: flex;
+  justify-content: space-between;
+  font-size: 1.6rem;
+}
+
+img {
+  margin-bottom: 2.5rem;
+  margin-left: 5rem;
+  width: 25rem;
+  border-radius: 0.6rem;
+}
+
+.name {
+  margin-bottom: 2.5rem;
+  font-size: 4rem;
+  font-weight: 500;
+  line-height: 1.1;
+}
+
+.description {
+  margin-bottom: 3rem;
+  color: #6b7280;
+  font-size: 1.6rem;
+}
+
+.price {
+  margin-bottom: 2rem;
+  font-size: 2rem;
+}
+
+button {
+  padding: 1rem 0;
+  width: 20rem;
+  cursor: pointer;
+  border: none;
+  border-radius: 0.6rem;
+  background: #f3f4f6;
+  transition: background 0.2s ease;
+}
+
+button:hover {
+  background: #dbdcdd;
+}
