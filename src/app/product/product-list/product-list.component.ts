@@ -1,10 +1,7 @@
-import { Component, OnInit, Output, EventEmitter } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { ProductService } from '../../services/products.service';
-import { Product } from '../../types/product';
-
-interface ProductQuantity {
-  [id: number]: number;
-}
+import { CartService } from '../../services/cart.service';
+import { Product, ProductCount } from '../../shared/types';
 
 @Component({
   selector: 'app-product-list',
@@ -13,34 +10,53 @@ interface ProductQuantity {
 })
 export class ProductListComponent implements OnInit {
   products: Product[] = [];
-  productQuantity: ProductQuantity = {};
-  @Output() addProductsToCart = new EventEmitter<any>();
-  @Output() removeProductFromCart = new EventEmitter<any>();
+  productState: ProductCount[] = [];
 
-  addProduct(id: number): void {
-    this.productQuantity[id] += 1;
+  initializeProductState(): void {
+    this.productState = this.products.map((product) => ({
+      id: product.id,
+      count: 0,
+    }));
   }
 
-  removeProduct(id: number): void {
-    if (this.productQuantity[id] === 0) {
-      this.productQuantity[id] = 0;
+  resetProductState(): void {
+    this.productState.forEach((product) => (product.count = 0));
+  }
+
+  findProductIndex(id: number): number {
+    return this.productState.findIndex((product) => product.id === id);
+  }
+
+  addItem(id: number): void {
+    const productIndex = this.findProductIndex(id);
+    this.productState[productIndex].count += 1;
+  }
+
+  removeItem(id: number): void {
+    const productIndex = this.findProductIndex(id);
+    if (this.productState[productIndex].count === 0) {
+      return;
     } else {
-      this.productQuantity[id] -= 1;
+      this.productState[productIndex].count -= 1;
     }
   }
 
-  addToCart(): void {
-    this.addProductsToCart.emit(this.productQuantity);
+  addToCart(id: number): void {
+    const productIndex = this.findProductIndex(id);
+    const product = this.productState[productIndex];
+    this.cartService.addToCart(product);
+    this.resetProductState();
   }
 
-  constructor(private productService: ProductService) {}
+  constructor(
+    private productService: ProductService,
+    private cartService: CartService
+  ) {}
 
   ngOnInit(): void {
     this.productService.getProducts().subscribe((data) => {
       this.products = data;
-      this.products.forEach((product) => {
-        this.productQuantity[product.id] = 0;
-      });
+      this.initializeProductState();
     });
   }
 }

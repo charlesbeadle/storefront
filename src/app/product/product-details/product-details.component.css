@@ -32,17 +32,3 @@ img {
   margin-bottom: 2rem;
   font-size: 2rem;
 }
-
-button {
-  padding: 1rem 0;
-  width: 20rem;
-  cursor: pointer;
-  border: none;
-  border-radius: 0.6rem;
-  background: #f3f4f6;
-  transition: background 0.2s ease;
-}
-
-button:hover {
-  background: #dbdcdd;
-}
