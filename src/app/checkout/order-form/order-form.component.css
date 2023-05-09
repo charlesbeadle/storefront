@@ -1,0 +1,80 @@
+form {
+  width: 59rem;
+  font-size: 1.4rem;
+}
+
+label {
+  margin-bottom: 0.5rem;
+}
+
+input {
+  padding: 1rem;
+  border: 0.1rem solid #d1d5db;
+  border-radius: 0.4rem;
+  box-shadow: 0rem 0rem 0.2rem rgba(0, 0, 0, 0.06);
+}
+
+.form__heading {
+  margin-bottom: 2rem;
+  font-size: 1.8rem;
+  color: #374151;
+}
+
+.form__container {
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+}
+
+.form__container .form__group {
+  width: 28.5rem;
+}
+
+.form__group {
+  margin-bottom: 2.5rem;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  position: relative;
+}
+
+.divider {
+  margin: 4rem 0;
+  height: 0.1rem;
+  width: 100%;
+  background: #e5e7eb;
+}
+
+.submit {
+  padding: 1.6rem 0rem;
+  width: 100%;
+  font-size: 1.6rem;
+  background: #4f46e5;
+  border: none;
+  border-radius: 0.4rem;
+  color: #fff;
+  cursor: pointer;
+}
+
+.submit[disabled] {
+  background: #757575;
+}
+
+.submit[disabled="false"] {
+  background: #757575;
+}
+
+.submit:hover:not([disabled]) {
+  background: #3b35c4;
+}
+
+.err-msg {
+  position: absolute;
+  bottom: -20px;
+  left: 0px;
+}
+
+.err-msg small {
+  color: red;
+}

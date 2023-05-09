@@ -1,0 +1,11 @@
+.container {
+  margin: 0 auto;
+  padding: 6.4rem 3.2rem;
+  width: 100%;
+  max-width: 128rem;
+  display: flex;
+  justify-content: space-between;
+  background: #f9fafb;
+  border-radius: 0.4rem;
+  border: 0.1rem solid #e5e7eb;
+}

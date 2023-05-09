@@ -5,7 +5,7 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { AppRoutingModule } from './app-routing.module';
 import { ProductModule } from './product/product.module';
 import { LayoutModule } from './layout/layout.module';
-import { CartModule } from './cart/cart.module';
+import { CheckoutModule } from './checkout/checkout.module';
 import { AppComponent } from './app.component';
 
 @NgModule({
@@ -17,7 +17,7 @@ import { AppComponent } from './app.component';
     AppRoutingModule,
     ProductModule,
     LayoutModule,
-    CartModule,
+    CheckoutModule,
   ],
   providers: [],
   bootstrap: [AppComponent],

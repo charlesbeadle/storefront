@@ -1,0 +1,123 @@
+<form [formGroup]="orderForm" (ngSubmit)="onSubmit()">
+  <p class="form__heading">Contact information</p>
+  <div class="form__group">
+    <label for="email">Email address</label>
+    <input type="text" formControlName="email" id="email">
+    <div class="err-msg"
+      *ngIf="orderForm.controls.email.invalid && (orderForm.controls.email.dirty || orderForm.controls.email.touched)">
+      <small *ngIf="orderForm.controls.email.hasError('required')">Email is required.</small>
+      <small *ngIf="orderForm.controls.email.hasError('email')">Invalid email format.</small>
+    </div>
+  </div>
+  <div class="divider"></div>
+  <p class="form__heading">Shipping information</p>
+  <div class="form__container">
+    <div class="form__group">
+      <label for="firstname">First name</label>
+      <input type="text" formControlName="firstname" id="firstname">
+      <div class="err-msg"
+        *ngIf="orderForm.controls.firstname.invalid && (orderForm.controls.firstname.dirty || orderForm.controls.firstname.touched)">
+        <small *ngIf="orderForm.controls.firstname.hasError('required')">First name is required.</small>
+        <small *ngIf="orderForm.controls.firstname.hasError('minlength')">At least two characters are required</small>
+      </div>
+    </div>
+    <div class="form__group">
+      <label for="lastname">Last name</label>
+      <input type="text" formControlName="lastname" id="lastname">
+      <div class="err-msg"
+        *ngIf="orderForm.controls.lastname.invalid && (orderForm.controls.lastname.dirty || orderForm.controls.lastname.touched)">
+        <small *ngIf="orderForm.controls.lastname.hasError('required')">Last name is required.</small>
+        <small *ngIf="orderForm.controls.lastname.hasError('minlength')">At least two characters are required</small>
+      </div>
+    </div>
+  </div>
+  <div class="form__group">
+    <label for="address">Address</label>
+    <input type="text" formControlName="address" id="address">
+    <div class="err-msg"
+      *ngIf="orderForm.controls.address.invalid && (orderForm.controls.address.dirty || orderForm.controls.address.touched)">
+      <small *ngIf="orderForm.controls.address.hasError('required')">Address is required.</small>
+    </div>
+  </div>
+  <div class="form__group">
+    <label for="address2">Apartment, suite, etc.</label>
+    <input type="text" formControlName="address2" id="address2">
+  </div>
+  <div class="form__group">
+    <label for="city">City</label>
+    <input type="text" formControlName="city" id="city">
+    <div class="err-msg"
+      *ngIf="orderForm.controls.city.invalid && (orderForm.controls.city.dirty || orderForm.controls.city.touched)">
+      <small *ngIf="orderForm.controls.city.hasError('required')">City is required.</small>
+    </div>
+  </div>
+  <div class="form__container">
+    <div class="form__group">
+      <label for="state">State</label>
+      <input type="text" formControlName="state" id="state">
+      <div class="err-msg"
+        *ngIf="orderForm.controls.state.invalid && (orderForm.controls.state.dirty || orderForm.controls.state.touched)">
+        <small *ngIf="orderForm.controls.state.hasError('required')">State is required.</small>
+      </div>
+    </div>
+    <div class="form__group">
+      <label for="zip">Postal code</label>
+      <input type="text" formControlName="zip" id="zip">
+      <div class="err-msg"
+        *ngIf="orderForm.controls.zip.invalid && (orderForm.controls.zip.dirty || orderForm.controls.zip.touched)">
+        <small *ngIf="orderForm.controls.zip.hasError('required')">Postal code is required.</small>
+        <small *ngIf="orderForm.controls.zip.hasError('pattern')">A five digit postal code is required</small>
+      </div>
+    </div>
+  </div>
+  <div class="form__group">
+    <label for="phone">Phone</label>
+    <input type="text" formControlName="phone" id="phone">
+    <div class="err-msg"
+      *ngIf="orderForm.controls.phone.invalid && (orderForm.controls.phone.dirty || orderForm.controls.phone.touched)">
+      <small *ngIf="orderForm.controls.phone.hasError('required')">Phone is required.</small>
+      <small *ngIf="orderForm.controls.phone.hasError('pattern')">A phone number including area code is required</small>
+    </div>
+  </div>
+  <div class="divider"></div>
+  <p class="form__heading">Payment</p>
+  <div class="form__group">
+    <label for="cc-number">Card number</label>
+    <input type="text" formControlName="ccNumber" id="cc-number">
+    <div class="err-msg"
+      *ngIf="orderForm.controls.ccNumber.invalid && (orderForm.controls.ccNumber.dirty || orderForm.controls.ccNumber.touched)">
+      <small *ngIf="orderForm.controls.ccNumber.hasError('required')">Credit card number is required.</small>
+      <small *ngIf="orderForm.controls.ccNumber.hasError('pattern')">A sixteen digit card number is required</small>
+    </div>
+  </div>
+  <div class="form__group">
+    <label for="cc-name">Name on card</label>
+    <input type="text" formControlName="ccName" id="cc-name">
+    <div class="err-msg"
+      *ngIf="orderForm.controls.ccName.invalid && (orderForm.controls.ccName.dirty || orderForm.controls.ccName.touched)">
+      <small *ngIf="orderForm.controls.ccName.hasError('required')">Name is required</small>
+    </div>
+  </div>
+  <div class="form__container">
+    <div class="form__group">
+      <label for="cc-expiration">Expiration date (MM/YY)</label>
+      <input type="text" formControlName="ccExpiration" id="cc-expiration">
+      <div class="err-msg"
+        *ngIf="orderForm.controls.ccExpiration.invalid && (orderForm.controls.ccExpiration.dirty || orderForm.controls.ccExpiration.touched)">
+        <small *ngIf="orderForm.controls.ccExpiration.hasError('required')">Expiration date is required.</small>
+        <small *ngIf="orderForm.controls.ccExpiration.hasError('pattern')">A date in (MM/YY) format is required</small>
+      </div>
+    </div>
+    <div class="form__group">
+      <label for="cc-security">Security code</label>
+      <input type="text" formControlName="ccSecurity" id="cc-security">
+      <div class="err-msg"
+        *ngIf="orderForm.controls.ccSecurity.invalid && (orderForm.controls.ccSecurity.dirty || orderForm.controls.ccSecurity.touched)">
+        <small *ngIf="orderForm.controls.ccSecurity.hasError('required')">Security code is required</small>
+        <small *ngIf="orderForm.controls.ccSecurity.hasError('pattern')">A three digit code is required</small>
+      </div>
+    </div>
+  </div>
+  <div class="divider"></div>
+  <button class="submit" type="submit" [disabled]="orderForm.invalid">Place order</button>
+</form>
