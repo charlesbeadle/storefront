@@ -10,4 +10,4 @@ This application allows users to view a list of available products to purchase, 
 
 1. Install the packages `npm install`
 
-2. Run `ng serve` to launch the application
+2. Run `npm run start` to launch the application
