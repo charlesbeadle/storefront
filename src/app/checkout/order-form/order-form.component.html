@@ -119,5 +119,5 @@
     </div>
   </div>
   <div class="divider"></div>
-  <button class="submit" type="submit" [disabled]="orderForm.invalid">Place order</button>
+  <button class="submit" type="submit" [disabled]="orderForm.invalid" (click)="clearCart()">Place order</button>
 </form>

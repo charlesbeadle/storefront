@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
+import { CartService } from '../../services/cart.service';
 
 @Component({
   selector: 'app-order-form',
@@ -8,7 +9,7 @@ import { Router } from '@angular/router';
   styleUrls: ['./order-form.component.css'],
 })
 export class OrderFormComponent {
-  constructor(private router: Router) {}
+  constructor(private router: Router, private cartService: CartService) {}
   orderForm = new FormGroup({
     email: new FormControl('', [Validators['required'], Validators['email']]),
     firstname: new FormControl('', [
@@ -51,5 +52,9 @@ export class OrderFormComponent {
       // simulated 200 response
       this.router.navigate(['/confirmation']);
     }
+  }
+
+  clearCart(): void {
+    this.cartService.clearCart();
   }
 }

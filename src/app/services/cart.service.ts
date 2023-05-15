@@ -29,4 +29,18 @@ export class CartService {
     const updatedItems = currentItems.filter((item) => item.id !== product.id);
     this.cartItemsSubject.next(updatedItems);
   }
+
+  changeProductCount(product: ProductCount, newCount: number): number {
+    const currentItems = this.cartItemsSubject.getValue();
+    const item = currentItems.find((item) => item.id === product.id);
+    if (item) {
+      item.count = newCount;
+    }
+    this.cartItemsSubject.next(currentItems);
+    return newCount;
+  }
+
+  clearCart(): void {
+    this.cartItemsSubject.next([]);
+  }
 }

@@ -59,6 +59,7 @@ input {
 
 .submit[disabled] {
   background: #757575;
+  cursor: initial;
 }
 
 .submit[disabled="false"] {
