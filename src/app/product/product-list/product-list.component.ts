@@ -44,8 +44,10 @@ export class ProductListComponent implements OnInit {
   addToCart(id: number): void {
     const productIndex = this.findProductIndex(id);
     const product = this.productState[productIndex];
-    this.cartService.addToCart(product);
-    this.resetProductState();
+    if (product.count > 0) {
+      this.cartService.addToCart(product);
+      this.resetProductState();
+    }
   }
 
   constructor(
