@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import { ProductService } from '../../services/products.service';
 import { CartService } from '../../services/cart.service';
+import { ToastService } from '../../services/toast.service';
 import { ProductCount, Product } from '../../shared/types/';
 
 @Component({
@@ -12,10 +13,12 @@ export class CartComponent {
   cartItems: any[] = [];
   products: Product[] = [];
   displayedCartItems: any[] = [];
+  toastActive = false;
 
   constructor(
     private productService: ProductService,
-    public cartService: CartService
+    public cartService: CartService,
+    private toastService: ToastService
   ) {}
 
   ngOnInit(): void {
@@ -26,6 +29,9 @@ export class CartComponent {
     this.productService.getProducts().subscribe((products) => {
       this.products = products;
       this.updateDisplayedCartItems();
+    });
+    this.toastService.toastStatus.subscribe((status: boolean) => {
+      this.toastActive = status;
     });
   }
 
@@ -45,6 +51,7 @@ export class CartComponent {
 
   removeProduct(product: ProductCount): void {
     this.cartService.removeFromCart(product);
+    this.triggerToast();
   }
 
   onCountChange(item: ProductCount, newCount: number) {
@@ -62,5 +69,9 @@ export class CartComponent {
         cartItem.count = updatedCount;
       }
     }
+  }
+
+  triggerToast() {
+    this.toastService.show();
   }
 }

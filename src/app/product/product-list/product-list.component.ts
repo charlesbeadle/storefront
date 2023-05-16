@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { ProductService } from '../../services/products.service';
 import { CartService } from '../../services/cart.service';
+import { ToastService } from '../../services/toast.service';
 import { Product, ProductCount } from '../../shared/types';
 
 @Component({
@@ -11,6 +12,7 @@ import { Product, ProductCount } from '../../shared/types';
 export class ProductListComponent implements OnInit {
   products: Product[] = [];
   productState: ProductCount[] = [];
+  toastActive = false;
 
   initializeProductState(): void {
     this.productState = this.products.map((product) => ({
@@ -47,12 +49,14 @@ export class ProductListComponent implements OnInit {
     if (product.count > 0) {
       this.cartService.addToCart(product);
       this.resetProductState();
+      this.triggerToast();
     }
   }
 
   constructor(
     private productService: ProductService,
-    private cartService: CartService
+    private cartService: CartService,
+    private toastService: ToastService
   ) {}
 
   ngOnInit(): void {
@@ -60,5 +64,12 @@ export class ProductListComponent implements OnInit {
       this.products = data;
       this.initializeProductState();
     });
+    this.toastService.toastStatus.subscribe((status: boolean) => {
+      this.toastActive = status;
+    });
+  }
+
+  triggerToast() {
+    this.toastService.show();
   }
 }

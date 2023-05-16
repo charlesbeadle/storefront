@@ -3,9 +3,8 @@ import { CommonModule } from '@angular/common';
 import { OrderFormComponent } from './order-form/order-form.component';
 import { CartComponent } from './cart/cart.component';
 import { LayoutComponent } from './layout/layout.component';
-import { ReactiveFormsModule } from '@angular/forms';
-import { QuantityComponent } from './quantity/quantity.component';
 import { FormsModule } from '@angular/forms';
+import { QuantityComponent } from './quantity/quantity.component';
 
 @NgModule({
   declarations: [
@@ -14,7 +13,7 @@ import { FormsModule } from '@angular/forms';
     LayoutComponent,
     QuantityComponent,
   ],
-  imports: [CommonModule, ReactiveFormsModule, FormsModule],
+  imports: [CommonModule, FormsModule],
   exports: [LayoutComponent],
 })
 export class CheckoutModule {}

@@ -1,3 +1,6 @@
 <select [(ngModel)]="currentCount" (change)="onCountChange($event)">
   <option *ngFor="let count of counts" [value]="count">{{count}}</option>
 </select>
+<div *ngIf="toastActive" class="toast">
+  <p class="toast__content">Cart Updated</p>
+</div>

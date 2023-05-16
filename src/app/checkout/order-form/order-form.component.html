@@ -1,12 +1,11 @@
-<form [formGroup]="orderForm" (ngSubmit)="onSubmit()">
+<form #form="ngForm" (ngSubmit)="onSubmit()">
   <p class="form__heading">Contact information</p>
   <div class="form__group">
     <label for="email">Email address</label>
-    <input type="text" formControlName="email" id="email">
-    <div class="err-msg"
-      *ngIf="orderForm.controls.email.invalid && (orderForm.controls.email.dirty || orderForm.controls.email.touched)">
-      <small *ngIf="orderForm.controls.email.hasError('required')">Email is required.</small>
-      <small *ngIf="orderForm.controls.email.hasError('email')">Invalid email format.</small>
+    <input type="text" name="email" id="email" [(ngModel)]="email" #emailField="ngModel" required email>
+    <div class="err-msg" *ngIf="emailField.invalid && (emailField.dirty || emailField.touched)">
+      <small *ngIf="emailField.errors && emailField.hasError('required')">Email is required.</small>
+      <small *ngIf="emailField.errors && emailField.hasError('email')">A valid email is required</small>
     </div>
   </div>
   <div class="divider"></div>
@@ -14,110 +13,107 @@
   <div class="form__container">
     <div class="form__group">
       <label for="firstname">First name</label>
-      <input type="text" formControlName="firstname" id="firstname">
-      <div class="err-msg"
-        *ngIf="orderForm.controls.firstname.invalid && (orderForm.controls.firstname.dirty || orderForm.controls.firstname.touched)">
-        <small *ngIf="orderForm.controls.firstname.hasError('required')">First name is required.</small>
-        <small *ngIf="orderForm.controls.firstname.hasError('minlength')">At least two characters are required</small>
+      <input type="text" name="firstname" id="firstname" required minlength="2" [(ngModel)]="firstname"
+        (ngModelChange)="capitalizeFirstLetter($event, 'firstname')" #firstnameField="ngModel">
+      <div class="err-msg" *ngIf="firstnameField.invalid && (firstnameField.dirty || firstnameField.touched)">
+        <small *ngIf="firstnameField.hasError('required')">First name is required.</small>
+        <small *ngIf="firstnameField.hasError('minlength')">At least two characters are required</small>
       </div>
     </div>
     <div class="form__group">
       <label for="lastname">Last name</label>
-      <input type="text" formControlName="lastname" id="lastname">
-      <div class="err-msg"
-        *ngIf="orderForm.controls.lastname.invalid && (orderForm.controls.lastname.dirty || orderForm.controls.lastname.touched)">
-        <small *ngIf="orderForm.controls.lastname.hasError('required')">Last name is required.</small>
-        <small *ngIf="orderForm.controls.lastname.hasError('minlength')">At least two characters are required</small>
+      <input type="text" name="lastname" id="lastname" required minlength="2" [(ngModel)]="lastname"
+        (ngModelChange)="capitalizeFirstLetter($event, 'lastname')" #lastnameField="ngModel">
+      <div class="err-msg" *ngIf="lastnameField.invalid && (lastnameField.dirty || lastnameField.touched)">
+        <small *ngIf="lastnameField.hasError('required')">Last name is required.</small>
+        <small *ngIf="lastnameField.hasError('minlength')">At least two characters are required</small>
       </div>
     </div>
   </div>
   <div class="form__group">
     <label for="address">Address</label>
-    <input type="text" formControlName="address" id="address">
-    <div class="err-msg"
-      *ngIf="orderForm.controls.address.invalid && (orderForm.controls.address.dirty || orderForm.controls.address.touched)">
-      <small *ngIf="orderForm.controls.address.hasError('required')">Address is required.</small>
+    <input type="text" name="address" id="address" [(ngModel)]="address" required #addressField="ngModel">
+    <div class="err-msg" *ngIf="addressField.invalid && (addressField.dirty || addressField.touched)">
+      <small *ngIf="addressField.hasError('required')">Address is required.</small>
     </div>
   </div>
   <div class="form__group">
     <label for="address2">Apartment, suite, etc.</label>
-    <input type="text" formControlName="address2" id="address2">
+    <input type="text" name="address2" id="address2" [(ngModel)]="address2">
   </div>
   <div class="form__group">
     <label for="city">City</label>
-    <input type="text" formControlName="city" id="city">
-    <div class="err-msg"
-      *ngIf="orderForm.controls.city.invalid && (orderForm.controls.city.dirty || orderForm.controls.city.touched)">
-      <small *ngIf="orderForm.controls.city.hasError('required')">City is required.</small>
+    <input type="text" name="city" id="city" [(ngModel)]="city" required #cityField="ngModel">
+    <div class="err-msg" *ngIf="cityField.invalid && (cityField.dirty || cityField.touched)">
+      <small *ngIf="cityField.hasError('required')">City is required.</small>
     </div>
   </div>
   <div class="form__container">
     <div class="form__group">
       <label for="state">State</label>
-      <input type="text" formControlName="state" id="state">
-      <div class="err-msg"
-        *ngIf="orderForm.controls.state.invalid && (orderForm.controls.state.dirty || orderForm.controls.state.touched)">
-        <small *ngIf="orderForm.controls.state.hasError('required')">State is required.</small>
+      <input type="text" name="state" id="state" [(ngModel)]="state" (ngModelChange)="state=$event.toUpperCase()"
+        required pattern="[a-zA-Z]{2}" #stateField="ngModel">
+      <div class="err-msg" *ngIf="stateField.invalid && (stateField.dirty || stateField.touched)">
+        <small *ngIf="stateField.hasError('required')">State is required.</small>
+        <small *ngIf="stateField.hasError('pattern')">A two character abbreviation is required</small>
       </div>
     </div>
     <div class="form__group">
       <label for="zip">Postal code</label>
-      <input type="text" formControlName="zip" id="zip">
-      <div class="err-msg"
-        *ngIf="orderForm.controls.zip.invalid && (orderForm.controls.zip.dirty || orderForm.controls.zip.touched)">
-        <small *ngIf="orderForm.controls.zip.hasError('required')">Postal code is required.</small>
-        <small *ngIf="orderForm.controls.zip.hasError('pattern')">A five digit postal code is required</small>
+      <input type="text" name="zip" id="zip" [(ngModel)]="zip" required pattern="[0-9]{5}" #zipField="ngModel">
+      <div class="err-msg" *ngIf="zipField.invalid && (zipField.dirty || zipField.touched)">
+        <small *ngIf="zipField.hasError('required')">Postal code is required.</small>
+        <small *ngIf="zipField.hasError('pattern')">A five digit postal code is required</small>
       </div>
     </div>
   </div>
   <div class="form__group">
     <label for="phone">Phone</label>
-    <input type="text" formControlName="phone" id="phone">
-    <div class="err-msg"
-      *ngIf="orderForm.controls.phone.invalid && (orderForm.controls.phone.dirty || orderForm.controls.phone.touched)">
-      <small *ngIf="orderForm.controls.phone.hasError('required')">Phone is required.</small>
-      <small *ngIf="orderForm.controls.phone.hasError('pattern')">A phone number including area code is required</small>
+    <input type="text" name="phone" id="phone" [(ngModel)]="phone" required pattern="[0-9]{3}-?[0-9]{3}-?[0-9]{4}"
+      #phoneField="ngModel">
+    <div class="err-msg" *ngIf="phoneField.invalid && (phoneField.dirty || phoneField.touched)">
+      <small *ngIf="phoneField.hasError('required')">Phone is required.</small>
+      <small *ngIf="phoneField.hasError('pattern')">A phone number including area code is required</small>
     </div>
   </div>
   <div class="divider"></div>
   <p class="form__heading">Payment</p>
   <div class="form__group">
     <label for="cc-number">Card number</label>
-    <input type="text" formControlName="ccNumber" id="cc-number">
-    <div class="err-msg"
-      *ngIf="orderForm.controls.ccNumber.invalid && (orderForm.controls.ccNumber.dirty || orderForm.controls.ccNumber.touched)">
-      <small *ngIf="orderForm.controls.ccNumber.hasError('required')">Credit card number is required.</small>
-      <small *ngIf="orderForm.controls.ccNumber.hasError('pattern')">A sixteen digit card number is required</small>
+    <input type="text" name="ccNumber" id="cc-number" [(ngModel)]="ccNumber" required
+      pattern="\d{4} ?\d{4} ?\d{4} ?\d{4}" #ccNumberField="ngModel">
+    <div class="err-msg" *ngIf="ccNumberField.invalid && (ccNumberField.dirty || ccNumberField.touched)">
+      <small *ngIf="ccNumberField.hasError('required')">Credit card number is required.</small>
+      <small *ngIf="ccNumberField.hasError('pattern')">A sixteen digit card number is required</small>
     </div>
   </div>
   <div class="form__group">
     <label for="cc-name">Name on card</label>
-    <input type="text" formControlName="ccName" id="cc-name">
-    <div class="err-msg"
-      *ngIf="orderForm.controls.ccName.invalid && (orderForm.controls.ccName.dirty || orderForm.controls.ccName.touched)">
-      <small *ngIf="orderForm.controls.ccName.hasError('required')">Name is required</small>
+    <input type="text" name="ccName" id="cc-name" [(ngModel)]="ccName" required #ccNameField="ngModel">
+    <div class="err-msg" *ngIf="ccNameField.invalid && (ccNameField.dirty || ccNameField.touched)">
+      <small *ngIf="ccNameField.hasError('required')">Name is required</small>
     </div>
   </div>
   <div class="form__container">
     <div class="form__group">
       <label for="cc-expiration">Expiration date (MM/YY)</label>
-      <input type="text" formControlName="ccExpiration" id="cc-expiration">
-      <div class="err-msg"
-        *ngIf="orderForm.controls.ccExpiration.invalid && (orderForm.controls.ccExpiration.dirty || orderForm.controls.ccExpiration.touched)">
-        <small *ngIf="orderForm.controls.ccExpiration.hasError('required')">Expiration date is required.</small>
-        <small *ngIf="orderForm.controls.ccExpiration.hasError('pattern')">A date in (MM/YY) format is required</small>
+      <input type="text" name="ccExpiration" id="cc-expiration" [(ngModel)]="ccExpiration" required
+        pattern="^(0[1-9]|1[0-2])\/([0-9]{2})$" #ccExpirationField="ngModel">
+      <div class="err-msg" *ngIf="ccExpirationField.invalid && (ccExpirationField.dirty || ccExpirationField.touched)">
+        <small *ngIf="ccExpirationField.hasError('required')">Expiration date is required.</small>
+        <small *ngIf="ccExpirationField.hasError('pattern')">A date in (MM/YY) format is required</small>
       </div>
     </div>
     <div class="form__group">
       <label for="cc-security">Security code</label>
-      <input type="text" formControlName="ccSecurity" id="cc-security">
-      <div class="err-msg"
-        *ngIf="orderForm.controls.ccSecurity.invalid && (orderForm.controls.ccSecurity.dirty || orderForm.controls.ccSecurity.touched)">
-        <small *ngIf="orderForm.controls.ccSecurity.hasError('required')">Security code is required</small>
-        <small *ngIf="orderForm.controls.ccSecurity.hasError('pattern')">A three digit code is required</small>
+      <input type="text" name="ccSecurity" id="cc-security" [(ngModel)]="ccSecurity" required pattern="[0-9]{3}"
+        #ccSecurityField="ngModel">
+      <div class="err-msg" *ngIf="ccSecurityField.invalid && (ccSecurityField.dirty || ccSecurityField.touched)">
+        <small *ngIf="ccSecurityField.hasError('required')">Security code is required</small>
+        <small *ngIf="ccSecurityField.hasError('pattern')">A three digit code is required</small>
       </div>
     </div>
   </div>
   <div class="divider"></div>
-  <button class="submit" type="submit" [disabled]="orderForm.invalid" (click)="clearCart()">Place order</button>
+  <button class="submit" type="submit" [disabled]="!form.valid">Place order</button>
 </form>
